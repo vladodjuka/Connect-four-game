@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Projekat game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.0/angular-messages.min.js"></script>
+
+</head>
+
+<body ng-app="MainApp">
+<div class="wrapper" ng-controller="MainController" id="scrollTo">
+<div ng-show="content">
+<div class="colCenter" ng-style="wider" ng-cloak>
+<h2>Connect 4 - GAME</h2>
+<div class="forma" ng-show="showForm">
+ <form name="playerInfo">
+ 	 <div  class="playerInput">
+      <input type="text" class="" placeholder="Player 1" name="player1" ng-model="player1" ng-minlength="4" 
+        ng-maxlength="12" required/>
+        
+   
+    
+        <div ng-messages="playerInfo.player1.$error" role="alert" style="color: red; margin-left: 10px;" ng-if="playerInfo.player1.$dirty">
+        <div ng-message="minlength">Your name is too short.</div>
+        <div ng-message="maxlength">Your name is too long.</div>
+        <div ng-message="required">Your name is required.</div>
+    </div>
+</div>
+		<div class="playerInput">
+		<input type="text" class="" ng-hide="ai" placeholder="Player 2" name="player2" ng-model="player2" ng-minlength="4" ng-maxlength="12" required/>
+        <div ng-messages="playerInfo.player2.$error" role="alert" style="color: red; margin-left: 10px;" ng-if="playerInfo.player2.$dirty">
+        <div ng-message="minlength">Your name is too short.</div>
+        <div ng-message="maxlength">Your name is too long.</div>
+        <div ng-message="required">Your name is required.</div>
+    </div>
+        <input type="checkbox" ng-model="ai"/>Against computer
+	</div>
+
+    <button id="clickThis" ng-click="checkInputValues();">Play</button>
+
+</form>
+</div>
+
+
+<div ng-show="gameHere">
+	<div class="player">Player 1: {{player1}}</div>
+	<div class="player">Player 2: {{player2}}</div>
+	<div style="text-align: center; font-size: 1.7em; padding-top: 70px; ">{{scorePlayer1}}&nbsp;:&nbsp;{{scorePlayer2}}</div>
+
+
+
+    <div class="turn player{{player}}"><div style="position: relative; top: 20px;">{{currentPlayer()}} is on the move.</div></div>
+	<div class="connect">
+		<div class="column" ng-repeat = "(col, array) in niz" ng-click="addItem(col, $index)">
+			<div style="bottom: {{(($index + 1) * 84) - 80}}px" class="dot player{{dot}} animated bounceInDown" ng-repeat="dot in array track by $index">
+				<!-- {{dotcolarray}} -->
+			</div>
+		</div>
+         <div class="clear"></div>
+	</div>
+</div>
+
+</div>
+
+<div class="darken" ng-show="showWinner" style="color: black; font-size: 1.7em;">
+    <div class="center" style="">
+        <div style="clearBoth">
+        <div style="text-align: center;">
+        {{currentPlayer()}} is WINNER.<br/>
+        Time: {{endTime | secondsToDateTime | date:'mm:ss'}}<br/><br/>
+        {{player1}}&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;{{player2}}<br/>
+        {{scorePlayer1}}&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;{{scorePlayer2}}
+        <div>
+    </div>
+        <button ng-click="playAgain()" style="border-radius: 0px; width: 48%; ">NEXT ROUND</button>
+        <button ng-click="startNew()" style="border-radius: 0px; width: 48%;">Start New Game</button>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+<div class="darken" ng-show="showDraw" style="color: black; font-size: 1.7em;">
+    <div class="center" style="">
+        <div style="clearBoth">
+        <div style="text-align: center;">
+        DRAW<br/>
+        Time: {{endTime | secondsToDateTime | date:'mm:ss'}}<br/><br/>
+        {{player1}}&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;{{player2}}<br/>
+        {{scorePlayer1}}&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;{{scorePlayer2}}
+        <div>
+    </div>
+        <button ng-click="playAgain()" style="border-radius: 0px; width: 48%; ">NEXT ROUND</button>
+        <button ng-click="startNew()" style="border-radius: 0px; width: 48%;">Start New Game</button>
+    </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript" src="js/app.js"></script>
+
+<script type="text/javascript" src="js/controllers/controller.js"></script>
+
+<script type="text/javascript" src="js/filter/filter.js"></script>
+
+<script>
+    
+</script>
+
+
+
+</div>
+
+</body>
+</html>
